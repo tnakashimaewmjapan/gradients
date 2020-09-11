@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>gradient</title>
+
+</head>
+<body style="margin:0;">
+    <div id="myapp" :style="bgGradient" style="text-align: center; height: 100vh;">
+        <input type="color" v-model="gradients.colorLeft">
+        <input type="color" v-model="gradients.colorRight">
+        <input type="range" min="0" max="360" v-model="gradients.deg"><span>{{gradients.deg}}</span><br>
+        <input type="text" size="43" v-model="'background: '+bgGradient.background+';'">
+    </div>
+
+    <!-- Vue.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+var myapp = new Vue({
+    el: '#myapp',
+    
+    data: {
+        gradients: {
+            colorLeft: '#FF8888',
+            colorRight: '#8888FF',
+            deg: '45',
+        },
+        bgGradient: {
+            background: 'linear-gradient(45deg,#FF8888,#8888FF)',
+        },
+    },
+    watch: {
+        gradients: {
+            handler: function() {
+                this.bgGradient.background = 'linear-gradient('+this.gradients.deg+'deg,'+this.gradients.colorLeft+','+this.gradients.colorRight+')'
+            },
+            deep: true    
+        }
+    }
+
+})
+    </script>
+</body>
+</html>
